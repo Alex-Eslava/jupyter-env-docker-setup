@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+
+        jupyter-environment:
+
+                image: jupyter/minimal-notebook
+                container_name: jupyter-environment
+                ports:
+                        - 8900:8888
+                environment:
+                        JUPYTER_ENABLE_LAB: "yes"
+                        JUPYTER_TOKEN: "token"
