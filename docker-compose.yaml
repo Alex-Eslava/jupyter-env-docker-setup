@@ -2,9 +2,9 @@ version: '3.3'
 
 services:
 
-        jupyterlab-environment:
+        dev-environment:
                 build: .
-                container_name: jupyterlab-environment
+                container_name: dev-environment
                 ports:
                         - 8900:8900
                 environment:
