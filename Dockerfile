@@ -5,10 +5,12 @@ RUN apt-get update && \
     apt-get install -y curl wget bzip2
 
 # Install Miniconda
-RUN curl -LO https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
-    bash Miniconda3-latest-Linux-x86_64.sh -p /opt/conda -b && \
-    rm Miniconda3-latest-Linux-x86_64.sh
-ENV PATH="/opt/conda/bin:${PATH}"
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ./Miniconda3-latest-Linux-x86_64.sh && \
+    bash ./Miniconda3-latest-Linux-x86_64.sh -b -p /miniconda3 && \
+    rm Miniconda3-latest-Linux-x86_64.sh && \
+    ln -s /miniconda3/bin/conda /usr/local/bin/conda && \
+    conda init && \
+    echo ". /usr/local/bin/conda" >> ~/.bashrc
 
 # Create and activate a new Conda environment
 RUN conda create --name chocolata python=3.8 && \
