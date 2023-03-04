@@ -1,21 +1,25 @@
+# Use the nvidia/cuda:11.0.3-runtime-ubuntu20.04 image
 FROM nvidia/cuda:11.0.3-runtime-ubuntu20.04
 
-# Install necessary packages for Python development
-RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
-    python3-dev \
-    build-essential \
-    git \
-    && rm -rf /var/lib/apt/lists/*
+# Install JupyterLab and minimal packages
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        python3 \
+        python3-pip \
+        jupyter-core \
+        jupyter-client \
+        jupyterlab \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Install JupyterLab and set up a custom kernel
-RUN pip3 install jupyterlab \
-    && python3 -m ipykernel install --user --name custom-kernel
+# Install custom kernel
+RUN python3 -m pip install ipykernel
+RUN python3 -m ipykernel install --name custom-kernel
 
-# Set the working directory
-WORKDIR /local/
+# Install requirements.txt 
+COPY requirements.txt /tmp/requirements.txt
+RUN /usr/local/bin/python -m pip install --no-cache-dir -r /tmp/requirements.txt -q --no-deps --target=/usr/local/lib/python3.8/site-packages/ ipykernel
 
-# Copy the requirements file to the working directory and install packages
-COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+# Set working directory
+WORKDIR /local
