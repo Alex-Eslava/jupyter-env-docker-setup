@@ -17,7 +17,7 @@ RUN conda create --name chocolata python=3.8
 
 # Install Python dependencies from requirements.txt
 COPY requirements.txt /tmp/requirements.txt
-RUN pip install -r /tmp/requirements.txt
+RUN pip3 install -r /tmp/requirements.txt
 
 # Set up the kernel for JupyterLab
 RUN python -m ipykernel install --user --name chocolata --display-name "chocolata"
