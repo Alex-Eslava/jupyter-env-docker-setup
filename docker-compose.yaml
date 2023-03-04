@@ -1,12 +1,8 @@
-version: '3.3'
-
+version: '3'
 services:
-
-        dev-environment:
-                build: .
-                container_name: dev-environment
-                ports:
-                        - 8900:8900
-                environment:
-                        JUPYTER_ENABLE_LAB: "yes"
-                        JUPYTER_TOKEN: "token"
+  jupyterlab:
+    image: chocolata_image
+    ports:
+      - "8900:8900"
+    volumes:
+      - ./notebooks:/notebooks
