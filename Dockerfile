@@ -13,8 +13,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
     echo ". /usr/local/bin/conda" >> ~/.bashrc
 
 # Create and activate a new Conda environment
-RUN conda create --name chocolata python=3.8 && \
-    conda activate chocolata
+RUN conda create --name chocolata python=3.8
 
 # Install Python dependencies from requirements.txt
 COPY requirements.txt /tmp/requirements.txt
