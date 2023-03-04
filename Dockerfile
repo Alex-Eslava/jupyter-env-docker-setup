@@ -19,9 +19,6 @@ RUN conda create --name chocolata python=3.8
 COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install -r /tmp/requirements.txt
 
-# Set up the kernel for JupyterLab
-RUN python -m ipykernel install --user --name chocolata --display-name "chocolata"
-
 # Expose JupyterLab port
 EXPOSE 8900
 
