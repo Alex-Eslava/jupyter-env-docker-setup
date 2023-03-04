@@ -25,7 +25,7 @@ RUN curl -fsSL https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_6
 
 # Create a new conda environment with only necessary packages
 ARG ENV_NAME=chocolata
-RUN /opt/conda/bin/conda create -y --name $ENV_NAME --display-name "Chocolata" \
+RUN /opt/conda/bin/conda create -y --name $ENV_NAME \
     python=3.8 \
     ipython \
     jupyterlab \
